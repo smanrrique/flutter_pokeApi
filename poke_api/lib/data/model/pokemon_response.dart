@@ -26,18 +26,14 @@ class PokemonResponse {
     );
   }
 
-  /// factory async (con imagen cargada)
   static Future<PokemonResponse> fromJsonWithImages(
     Map<String, dynamic> json,
   ) async {
     var list = json["results"] as List;
 
-    // aquí usamos el factory async de Pokemon
     List<Pokemon> pokemonList = await Future.wait(
       list.map((hero) => Pokemon.fromJsonWithImage(hero)),
     );
-
-    print(json);
 
     return PokemonResponse(
       listPokemons: pokemonList,
