@@ -19,7 +19,7 @@ class BodyList extends StatelessWidget {
           mainAxisSpacing: 8,
           childAspectRatio: 0.9,
         ),
-        itemCount: pokemonResponse!.listPokemons.length ?? 0,
+        itemCount: pokemonResponse.listPokemons.length,
         itemBuilder: (context, index) {
           return CardPokemon(item:pokemons[index]);
         },

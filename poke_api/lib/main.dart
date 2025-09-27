@@ -20,7 +20,16 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pokemon App',
       debugShowCheckedModeBanner: false,
-      home: const PokemonSearchScreen(),
+      home: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.lightBlue, Colors.white],
+          ),
+        ),
+        child: PokemonSearchScreen(),
+      ),
     );
   }
 }

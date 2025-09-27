@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:poke_api/components/BodyList.dart';
 import 'package:poke_api/components/CustomAppBar.dart';
-import 'package:poke_api/data/model/pokemon_datail_response.dart';
-import 'package:poke_api/data/model/pokemon_response.dart';
+import 'package:poke_api/components/ElevateButtonLoadMore.dart';
+import 'package:poke_api/components/TextFieldSearch.dart';
 import 'package:poke_api/data/repository/pokemon_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:poke_api/providers/pokemon_provider.dart';
@@ -30,19 +30,13 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
     final pokemonProvider = Provider.of<PokemonProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Busca un Pokemon",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-              ),
-              onChanged: (text) {},
-            ),
+            TextfieldSearch(),
             const SizedBox(height: 8),
 
             if (pokemonProvider.loading &&
@@ -53,11 +47,10 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
                 (pokemonProvider.response?.listPokemons.isNotEmpty ?? false))
               BodyList(pokemonResponse: pokemonProvider.response!),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: () {
+            ElevateButtonLoadMore(
+              loadMore: () {
                 pokemonProvider.loadMore();
               },
-              child: Text('Cargar mas datos'),
             ),
           ],
         ),

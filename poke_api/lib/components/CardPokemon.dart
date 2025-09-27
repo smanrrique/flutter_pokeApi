@@ -27,6 +27,6 @@ class CardPokemon extends StatelessWidget {
           Text(item.name),
         ],
       ),
-    );;
+    );
   }
 }
