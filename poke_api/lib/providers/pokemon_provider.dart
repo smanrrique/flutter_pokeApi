@@ -19,6 +19,7 @@ class PokemonProvider extends ChangeNotifier {
 
   Future<void> loadMore() async {
     loading = true;
+    notifyListeners(); 
     final newResponse = await repository.loadMore(response!.next);
 
     if(newResponse != null){

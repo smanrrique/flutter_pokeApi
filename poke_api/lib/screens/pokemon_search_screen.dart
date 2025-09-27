@@ -39,8 +39,7 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
             TextfieldSearch(),
             const SizedBox(height: 8),
 
-            if (pokemonProvider.loading &&
-                (pokemonProvider.response?.listPokemons.isEmpty ?? true))
+            if (pokemonProvider.loading)
               Center(child: CircularProgressIndicator()),
 
             if (!pokemonProvider.loading &&

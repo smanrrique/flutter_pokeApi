@@ -13,21 +13,23 @@ class Pokemon {
   }
 
   static Future<Pokemon> fromJsonWithImage(Map<String, dynamic> json) async {
-
-    var namePokemon = json["name"].toString()[0].toUpperCase() + json["name"].toString().substring(1) ;
+    var namePokemon =
+        json["name"].toString()[0].toUpperCase() +
+        json["name"].toString().substring(1);
     final pokemon = Pokemon(name: namePokemon, url: json["url"]);
     pokemon.urlImage = await pokemon.getImageUrl();
     return pokemon;
   }
 
   Future<String?> getImageUrl() async {
-  final uri = Uri.parse(url);
-  final response = await http.get(uri);
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
 
-  if (response.statusCode == 200) {
-    var decodeJson = jsonDecode(response.body);    
-    return decodeJson["sprites"]["front_default"];
+    if (response.statusCode == 200) {
+      var decodeJson = jsonDecode(response.body);
+      return decodeJson["sprites"]["other"]["dream_world"]["front_default"];
+    }
+    return null;
   }
-  return null;
-}
+  
 }
