@@ -13,7 +13,9 @@ class Pokemon {
   }
 
   static Future<Pokemon> fromJsonWithImage(Map<String, dynamic> json) async {
-    final pokemon = Pokemon(name: json["name"], url: json["url"]);
+
+    var namePokemon = json["name"].toString()[0].toUpperCase() + json["name"].toString().substring(1) ;
+    final pokemon = Pokemon(name: namePokemon, url: json["url"]);
     pokemon.urlImage = await pokemon.getImageUrl();
     return pokemon;
   }
