@@ -13,26 +13,11 @@ class PokemonResponse {
     required this.listPokemons,
   });
 
-  factory PokemonResponse.fromJson(Map<String, dynamic> json) {
-    var list = json["results"] as List;
-    List<Pokemon> pokemonList = list
-        .map((hero) => Pokemon.fromJson(hero))
-        .toList();
-    return PokemonResponse(
-      listPokemons: pokemonList,
-      count: json["count"],
-      previus: json["previous"],
-      next: json["next"],
-    );
-  }
-
-  static Future<PokemonResponse> fromJsonWithImages(
-    Map<String, dynamic> json,
-  ) async {
+  static Future<PokemonResponse> fromJson(Map<String, dynamic> json) async {
     var list = json["results"] as List;
 
     List<Pokemon> pokemonList = await Future.wait(
-      list.map((hero) => Pokemon.fromJsonWithImage(hero)),
+      list.map((hero) => Pokemon.fromJson(hero)),
     );
 
     return PokemonResponse(
@@ -42,4 +27,5 @@ class PokemonResponse {
       next: json["next"],
     );
   }
+
 }

@@ -13,7 +13,7 @@ class Repository {
     if (response.statusCode == 200) {
       var decodeJson = jsonDecode(response.body);
  
-      PokemonResponse pokemonResponse = await PokemonResponse.fromJsonWithImages(
+      PokemonResponse pokemonResponse = await PokemonResponse.fromJson(
         decodeJson,
       );
 
@@ -32,7 +32,7 @@ class Repository {
     if (response.statusCode == 200) {
       var decodeJson = jsonDecode(response.body);
  
-      PokemonResponse pokemonResponse = await PokemonResponse.fromJsonWithImages(
+      PokemonResponse pokemonResponse = await PokemonResponse.fromJson(
         decodeJson,
       );
 

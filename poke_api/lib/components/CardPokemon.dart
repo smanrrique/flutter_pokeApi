@@ -17,7 +17,7 @@ class CardPokemon extends StatelessWidget {
           barrierLabel: "Cerrar",
           transitionDuration: const Duration(milliseconds: 300),
           pageBuilder: (context, animation, secondaryAnimation) {
-            return ModalDetailPokemon(pokemon: item,);
+            return ModalDetailPokemon(pokemon: item);
           },
         );
       },
@@ -30,9 +30,9 @@ class CardPokemon extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              item.urlImage != null
+              item.urlImage != ""
                   ? SvgPicture.network(
-                      item.urlImage!,
+                      item.urlImage,
                       height: 100,
                       width: 100,
                       placeholderBuilder: (context) =>
