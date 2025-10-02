@@ -17,73 +17,104 @@ class ModalDetailPokemon extends StatelessWidget {
         child: Stack(
           clipBehavior: Clip.none,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.65,
-              height: MediaQuery.of(context).size.height * 0.4,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: 200,
+                maxWidth: MediaQuery.of(context).size.width * 0.7,
+                minHeight: 150,
+                maxHeight: MediaQuery.of(context).size.height * 0.55,
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 60,
-                  left: 8,
-                  right: 8,
-                  bottom: 8,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 50),
-                    Text(
-                      pokemon.name,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 60,
+                    left: 8,
+                    right: 8,
+                    bottom: 8,
+                  ),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 50),
+                      Text(
+                        pokemon.name,
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.width * 0.07,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 12,
-                      children: pokemon.listTypes.map((nombre) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color:
-                                AppColors.typesPokemonColor[nombre] ??
-                                Colors.grey,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
+                      SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 12,
+                        children: pokemon.listTypes.map((nombre) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              top: 0,
+                              bottom: 0,
+                              left: 8,
+                              right: 8,
                             ),
-                            child: Text(
-                              nombre,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    AppColors.typesPokemonColor[nombre] ??
+                                    Colors.grey,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    nombre,
+                                    style: TextStyle(
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                          0.05,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
+                          );
+                        }).toList(),
+                      ),
+                      SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.fitness_center, color: Colors.grey),
+                          SizedBox(width: 5),
+                          Text(
+                            "${pokemon.weight} kg",
+                            style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                            ),
                           ),
-                        );
-                      }).toList(),
-                    ),
-                    SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.fitness_center, color: Colors.grey),
-                        SizedBox(width: 5),
-                        Text("${pokemon.weight} kg"),
-                        SizedBox(width: 20),
-                        Icon(Icons.height, color: Colors.grey),
-                        SizedBox(width: 5),
-                        Text("${pokemon.height} m"),
-                      ],
-                    ),
-                    SizedBox(height: 12),
-                    StatsPokemon(pokemon: pokemon),
-                  ],
+                          SizedBox(width: 20),
+                          Icon(Icons.height, color: Colors.grey),
+                          SizedBox(width: 5),
+                          Text(
+                            "${pokemon.height} m",
+                            style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12),
+                      StatsPokemon(pokemon: pokemon),
+                      
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -109,4 +140,3 @@ class ModalDetailPokemon extends StatelessWidget {
     );
   }
 }
-

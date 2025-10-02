@@ -31,18 +31,19 @@ class CardPokemon extends StatelessWidget {
           child: Column(
             children: [
               item.urlImage != ""
-                  ? SvgPicture.network(
-                      item.urlImage,
-                      height: 100,
-                      width: 100,
-                      placeholderBuilder: (context) =>
-                          const CircularProgressIndicator(),
-                    )
+                  ? Expanded(
+                    child: SvgPicture.network(
+                        item.urlImage,
+                        fit: BoxFit.contain,
+                        placeholderBuilder: (context) =>
+                            const CircularProgressIndicator(),
+                      ),
+                  )
                   : const Icon(Icons.image_not_supported, size: 80),
               const SizedBox(height: 10),
               Text(
                 item.name,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.04, fontWeight: FontWeight.bold),
               ),
             ],
           ),

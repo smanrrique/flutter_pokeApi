@@ -40,7 +40,13 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
             const SizedBox(height: 8),
 
             if (pokemonProvider.loading)
-              Center(child: CircularProgressIndicator()),
+              Center(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
 
             if (!pokemonProvider.loading &&
                 (pokemonProvider.response?.listPokemons.isNotEmpty ?? false))
