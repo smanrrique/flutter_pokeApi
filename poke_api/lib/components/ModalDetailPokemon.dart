@@ -4,10 +4,10 @@ import 'package:poke_api/components/StatsPokemon.dart';
 import 'package:poke_api/data/model/pokemon_datail_response.dart';
 import 'package:poke_api/utils/app_colors.dart';
 
-class ModalDetailPokemon extends StatelessWidget {
+class FrontModalDetailPokemon extends StatelessWidget {
   final Pokemon pokemon;
 
-  const ModalDetailPokemon({super.key, required this.pokemon});
+  const FrontModalDetailPokemon({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,6 @@ class ModalDetailPokemon extends StatelessWidget {
                       SizedBox(height: 12),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 12,
                         children: pokemon.listTypes.map((nombre) {
                           return Padding(
                             padding: const EdgeInsets.only(
@@ -89,30 +88,42 @@ class ModalDetailPokemon extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.fitness_center, color: Colors.grey),
-                          SizedBox(width: 5),
-                          Text(
-                            "${pokemon.weight} kg",
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.fitness_center, color: Colors.grey),
+                                Text(
+                                  "${pokemon.weight} kg",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                        0.04,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(width: 20),
-                          Icon(Icons.height, color: Colors.grey),
-                          SizedBox(width: 5),
-                          Text(
-                            "${pokemon.height} m",
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.height, color: Colors.grey),
+                                Text(
+                                  "${pokemon.height} m",
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                        0.04,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 12),
                       StatsPokemon(pokemon: pokemon),
-                      
                     ],
                   ),
                 ),
