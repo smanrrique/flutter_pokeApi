@@ -8,9 +8,8 @@ class ElevateButtonLoadMore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF1E90FF)),
         onPressed: () {
           loadMore();
         },

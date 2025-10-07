@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:poke_api/components/StatsPokemon.dart';
+import 'package:poke_api/components/TypePokemon.dart';
+import 'package:poke_api/components/WeigthAndHeight.dart';
 import 'package:poke_api/data/model/pokemon_datail_response.dart';
+import 'package:poke_api/providers/pokemon_provider.dart';
 import 'package:poke_api/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class FrontModalDetailPokemon extends StatelessWidget {
   final Pokemon pokemon;
@@ -11,6 +15,10 @@ class FrontModalDetailPokemon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonProvider = Provider.of<PokemonProvider>(
+      context,
+      listen: false,
+    );
     return Center(
       child: Material(
         color: Colors.transparent,
@@ -31,13 +39,33 @@ class FrontModalDetailPokemon extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    top: 60,
+                    top: 8,
                     left: 8,
                     right: 8,
                     bottom: 8,
                   ),
                   child: Column(
                     children: [
+                      Row(
+                        children: [
+                          Spacer(),
+                          Consumer<PokemonProvider>(
+                            builder: (context, provider, child) {
+                              return IconButton(
+                                onPressed: () {
+                                  provider.toggleFavorite(pokemon);
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color: pokemon.isFavorite
+                                      ? Colors.red
+                                      : Colors.grey,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                       const SizedBox(height: 50),
                       Text(
                         pokemon.name,
@@ -47,81 +75,9 @@ class FrontModalDetailPokemon extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: pokemon.listTypes.map((nombre) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              top: 0,
-                              bottom: 0,
-                              left: 8,
-                              right: 8,
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color:
-                                    AppColors.typesPokemonColor[nombre] ??
-                                    Colors.grey,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8.0,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    nombre,
-                                    style: TextStyle(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                          0.05,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                      TypePokemon(pokemon: pokemon),
                       SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.fitness_center, color: Colors.grey),
-                                Text(
-                                  "${pokemon.weight} kg",
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                        0.04,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.height, color: Colors.grey),
-                                Text(
-                                  "${pokemon.height} m",
-                                  style: TextStyle(
-                                    fontSize:
-                                        MediaQuery.of(context).size.width *
-                                        0.04,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      WeigthAndHeight(pokemon: pokemon),
                       SizedBox(height: 12),
                       StatsPokemon(pokemon: pokemon),
                     ],

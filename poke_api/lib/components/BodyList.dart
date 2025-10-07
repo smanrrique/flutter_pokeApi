@@ -14,7 +14,7 @@ class BodyList extends StatelessWidget {
     return Expanded(
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+          crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
           childAspectRatio: 0.9,

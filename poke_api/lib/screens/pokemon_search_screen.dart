@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:poke_api/components/BodyList.dart';
 import 'package:poke_api/components/CustomAppBar.dart';
 import 'package:poke_api/components/ElevateButtonLoadMore.dart';
+import 'package:poke_api/components/FloatingButtonFavorite.dart';
 import 'package:poke_api/components/TextFieldSearch.dart';
 import 'package:poke_api/data/repository/pokemon_repository.dart';
 import 'package:provider/provider.dart';
@@ -52,14 +53,37 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
                 (pokemonProvider.response?.listPokemons.isNotEmpty ?? false))
               BodyList(pokemonResponse: pokemonProvider.response!),
             const SizedBox(height: 8),
-            ElevateButtonLoadMore(
-              loadMore: () {
-                pokemonProvider.loadMore();
-              },
-            ),
           ],
         ),
+      ),
+      floatingActionButton: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            bottom: 16,
+            left: MediaQuery.of(context).size.width * 0.064,
+            right: 0,
+            child: Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width * 0.12,
+                child: ElevateButtonLoadMore(
+                  loadMore: () {
+                    pokemonProvider.loadMore();
+                  },
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: MediaQuery.of(context).size.width * 0.04,
+            right: MediaQuery.of(context).size.width * 0.01,
+            child: SizedBox(
+              child: FloatingButtonFavorite(),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+

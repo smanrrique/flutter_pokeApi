@@ -4,6 +4,7 @@ import 'dart:convert';
 class Pokemon {
   final String name;
   String url = "";
+  bool isFavorite = false;
   String urlImage = "";
   List<String> listTypes = [];
   Map<String, String> mapStats = {};
@@ -42,5 +43,9 @@ class Pokemon {
         stat["stat"]["name"].substring(1): stat["base_stat"].toString(),
       };
     }
+  }
+
+  void setFavorite(bool value){
+    isFavorite = value;
   }
 }

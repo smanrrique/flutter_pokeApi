@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:poke_api/data/model/pokemon_datail_response.dart';
 import 'package:poke_api/data/model/pokemon_response.dart';
 import 'package:poke_api/data/repository/pokemon_repository.dart';
 
@@ -12,19 +13,23 @@ class PokemonProvider extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    response = await repository.getPokemons();   
+    response = await repository.getPokemons();
     loading = false;
-    notifyListeners(); 
+    notifyListeners();
   }
 
   Future<void> loadMore() async {
     final newResponse = await repository.loadMore(response!.next);
 
-    if(newResponse != null){
+    if (newResponse != null) {
       response!.listPokemons.addAll(newResponse.listPokemons);
       response!.next = newResponse.next;
     }
-    notifyListeners(); 
+    notifyListeners();
   }
-  
+
+  void toggleFavorite(Pokemon pokemon) {
+    pokemon.setFavorite(!pokemon.isFavorite);
+    notifyListeners();
+  }
 }
