@@ -5,7 +5,6 @@ import 'package:poke_api/components/TypePokemon.dart';
 import 'package:poke_api/components/WeigthAndHeight.dart';
 import 'package:poke_api/data/model/pokemon_datail_response.dart';
 import 'package:poke_api/providers/pokemon_provider.dart';
-import 'package:poke_api/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
 class FrontModalDetailPokemon extends StatelessWidget {
@@ -15,10 +14,7 @@ class FrontModalDetailPokemon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonProvider = Provider.of<PokemonProvider>(
-      context,
-      listen: false,
-    );
+    final pokemonProvider = context.watch<PokemonProvider>();
     return Center(
       child: Material(
         color: Colors.transparent,
@@ -49,20 +45,16 @@ class FrontModalDetailPokemon extends StatelessWidget {
                       Row(
                         children: [
                           Spacer(),
-                          Consumer<PokemonProvider>(
-                            builder: (context, provider, child) {
-                              return IconButton(
-                                onPressed: () {
-                                  provider.toggleFavorite(pokemon);
-                                },
-                                icon: Icon(
-                                  Icons.favorite,
-                                  color: pokemon.isFavorite
-                                      ? Colors.red
-                                      : Colors.grey,
-                                ),
-                              );
+                          IconButton(
+                            onPressed: () {
+                              pokemonProvider.toggleFavorite(pokemon);
                             },
+                            icon: Icon(
+                              Icons.favorite,
+                              color: pokemon.isFavorite
+                                  ? Colors.red
+                                  : Colors.grey,
+                            ),
                           ),
                         ],
                       ),

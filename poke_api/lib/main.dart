@@ -4,12 +4,7 @@ import 'package:poke_api/screens/pokemon_search_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => PokemonProvider()..loadPokemons(),
-      child: MainApp(),
-    ),
-  );
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -17,18 +12,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokemon App',
-      debugShowCheckedModeBanner: false,
-      home: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.lightBlue, Colors.white],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PokemonProvider())
+      ],
+      child: MaterialApp(
+        title: 'Pokemon App',
+        debugShowCheckedModeBanner: false,
+        home: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.lightBlue, Colors.white],
+            ),
           ),
+          child: PokemonSearchScreen(),
         ),
-        child: PokemonSearchScreen(),
       ),
     );
   }

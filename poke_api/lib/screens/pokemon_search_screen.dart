@@ -28,7 +28,7 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonProvider = Provider.of<PokemonProvider>(context);
+    final pokemonProvider = context.watch<PokemonProvider>();
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -51,7 +51,7 @@ class _PokemonSearchScreenState extends State<PokemonSearchScreen> {
 
             if (!pokemonProvider.loading &&
                 (pokemonProvider.response?.listPokemons.isNotEmpty ?? false))
-              BodyList(pokemonResponse: pokemonProvider.response!),
+              BodyList(),
             const SizedBox(height: 8),
           ],
         ),
