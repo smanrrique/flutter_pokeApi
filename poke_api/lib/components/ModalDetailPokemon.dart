@@ -85,8 +85,8 @@ class FrontModalDetailPokemon extends StatelessWidget {
                 child: pokemon.urlImage != ""
                     ? SvgPicture.network(
                         pokemon.urlImage,
-                        height: 200,
-                        width: 200,
+                        height: MediaQuery.of(context).size.width * 0.4 ,
+                        width: MediaQuery.of(context).size.width * 0.4 ,
                         placeholderBuilder: (context) =>
                             const CircularProgressIndicator(),
                       )
