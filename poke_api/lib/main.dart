@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:poke_api/providers/pokemon_provider.dart';
-import 'package:poke_api/screens/pokemon_search_screen.dart';
+import 'package:poke_api/features/pokemon/presentation/providers/pokemon_provider.dart';
+import 'package:poke_api/features/pokemon/presentation/screens/pokemon_search_screen.dart';
+import 'package:poke_api/injection_container.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MainApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final dependencies = await AppDependencies.bootstrap();
+  runApp(MainApp(dependencies: dependencies));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final AppDependencies dependencies;
+
+  const MainApp({super.key, required this.dependencies});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PokemonProvider())
+        ChangeNotifierProvider<PokemonProvider>.value(
+          value: dependencies.pokemonProvider,
+        ),
       ],
       child: MaterialApp(
         title: 'Pokemon App',
@@ -27,7 +34,7 @@ class MainApp extends StatelessWidget {
               colors: [Colors.lightBlue, Colors.white],
             ),
           ),
-          child: PokemonSearchScreen(),
+          child: const PokemonSearchScreen(),
         ),
       ),
     );
