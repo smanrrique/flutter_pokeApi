@@ -10,19 +10,32 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final favorites = context.watch<PokemonProvider>().favorites;
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('Favoritos'),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.lightBlue, Colors.white],
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: favorites.isEmpty
-            ? const Center(child: Text('Aún no tienes favoritos'))
-            : Column(
-                children: [BodyList(pokemons: favorites)],
-              ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          title: const Text('Favoritos'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: favorites.isEmpty
+              ? const Center(child: Text('Aún no tienes favoritos'))
+              : Column(
+                  children: [BodyList(pokemons: favorites)],
+                ),
+        ),
       ),
     );
   }
